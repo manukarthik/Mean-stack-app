@@ -9,7 +9,7 @@ var User = require('./models/user.js')
 var posts = [
 {
     message: 'hell'
-},
+}, 
 {
     message:'hi'
 }
