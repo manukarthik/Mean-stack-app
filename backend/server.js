@@ -21,6 +21,17 @@ app.use(bodyParser.json())
 app.get('/posts', (req, res) => {
     res.send(posts)
 })
+app.get('/users', async(req, res) => {
+    try{
+        var users = await User.find({}, '-password -__v')
+        res.send(users)
+    }
+    catch(error){
+        console.error(console.error())
+        res.sendStatus(500)
+          
+    }
+})
 app.post('/register', (req, res) => {
     var userData = req.body;
     var user = new User(userData)
