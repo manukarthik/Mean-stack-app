@@ -1,5 +1,6 @@
-var Mongoose= require('mongoose')
+var mongoose= require('mongoose')
 
-module.exports=Mongoose.model('Post',{
-    msg : String
+module.exports=mongoose.model('Post',{
+    msg : String,
+    author:{type: mongoose.Schema.Types.ObjectId, ref:'User'}
 })
