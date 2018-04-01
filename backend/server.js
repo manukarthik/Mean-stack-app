@@ -26,7 +26,7 @@ app.get('/posts', (req, res) => {
 })
 
 app.post('/post', (req,res)=>{
-var post = new Post(req,res)
+var post = new Post(req.body)
 
     post.save((err, result) => {
         if(err){
