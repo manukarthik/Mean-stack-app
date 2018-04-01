@@ -6,6 +6,7 @@ var jwt = require('jwt-simple')
 var app = express();
 var bcrypt= require('bcrypt-nodejs')
 var User = require('./models/User.js')
+var Post = require('./models/Post.js')
 var auth = require('./auth.js')
 
 var posts = [
@@ -19,9 +20,23 @@ var posts = [
 
 app.use(cors())
 app.use(bodyParser.json())
+
 app.get('/posts', (req, res) => {
     res.send(posts)
 })
+
+app.post('/post', (req,res)=>{
+var post = new Post(req,res)
+
+    post.save((err, result) => {
+        if(err){
+        console.error('saving post eror');
+        res.status(500).send({ message: 'saving post error' })
+        }
+        res.sendStatus(200)
+    })
+})
+
 app.get('/users', async(req, res) => {
     try{
         var users = await User.find({}, '-password -__v')
