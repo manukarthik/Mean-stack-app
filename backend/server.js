@@ -31,7 +31,7 @@ var post = new Post(req,res)
     post.save((err, result) => {
         if(err){
         console.error('saving post eror');
-        res.status(500).send({ message: 'saving post error' })
+        return res.status(500).send({ message: 'saving post error' })
         }
         res.sendStatus(200)
     })
