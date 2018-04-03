@@ -9,19 +9,14 @@ var User = require('./models/User.js')
 var Post = require('./models/Post.js')
 var auth = require('./auth.js')
 
-var posts = [
-{
-    message: 'hell'
-}, 
-{
-    message:'hi'
-}
-]
+
 
 app.use(cors())
 app.use(bodyParser.json())
 
-app.get('/posts', (req, res) => {
+app.get('/posts/:id', async(req, res) => {
+    var author = req.params.id
+    var posts = await Post.find({ author })
     res.send(posts)
 })
 
