@@ -31,4 +31,21 @@ var router=express.Router()
         })
 
        })
-module.exports = router
+var auth = {
+    router, //Express middleware to check the authorization header
+     checkAuthenticated : (req, res, next)=> {
+    if (!req.header('authorization'))
+        return res.status(401).send({ message: 'Unauthorized. Missing Auth header' })
+    var token = req.header('authorization').split(' ')[1]
+
+    var payload = jwt.decode(token, '123')
+    if (!payload)
+        return res.status(401).send({ message: 'Unauthorized.Auth header Invalid' })
+
+    req.userId = payload.sub
+    next()
+
+}
+}
+       
+module.exports = auth
