@@ -23,7 +23,7 @@ var router=express.Router()
         bcrypt.compare(LoginData.password, user.password, (err, isMatch) => {
             if (!isMatch)
                 return res.status(401).send({ message: 'Email or passoword invalid' })
-            var payload = {}
+            var payload = {sub: user._id}
 
             var token = jwt.encode(payload, '123')
             console.log(token)
