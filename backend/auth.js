@@ -9,9 +9,11 @@ var router=express.Router()
    router.post('/register' , (req, res) => {
     var userData = req.body;
     var user = new User(userData)
-    user.save((err, result) => {
-        console.log('saving user eror')
-        res.sendStatus(200)
+    user.save((err, newUser) => {
+        if(err)
+        return res.status(500).send({ message: 'error saving user' })
+
+        createSendToken(res, newUser)
     })
 })
 
@@ -23,14 +25,17 @@ var router=express.Router()
         bcrypt.compare(LoginData.password, user.password, (err, isMatch) => {
             if (!isMatch)
                 return res.status(401).send({ message: 'Email or passoword invalid' })
-            var payload = {sub: user._id}
-
-            var token = jwt.encode(payload, '123')
-            console.log(token)
-            res.status(200).send({ token })
+            createSendToken(res,user)
         })
 
        })
+       function createSendToken(res, user) {
+           var payload = { sub: user._id }
+
+           var token = jwt.encode(payload, '123')
+         
+           res.status(200).send({ token })
+       }
 var auth = {
     router, //Express middleware to check the authorization header
      checkAuthenticated : (req, res, next)=> {
