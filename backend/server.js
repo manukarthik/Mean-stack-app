@@ -20,6 +20,7 @@ app.get('/posts/:id', async(req, res) => {
     res.send(posts)
 })
 
+
 app.post('/post', auth.checkAuthenticated,  (req,res)=>{
     var postData = req.body
     postData.author = req.userId
