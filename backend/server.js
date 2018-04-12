@@ -69,4 +69,4 @@ mongoose.connect('mongodb://test:test@ds121589.mlab.com:21589/mean',(err)=>{
 })
 
 app.use('/auth', auth.router)
-app.listen(3000) 
+app.listen(process.env.PORT || 3000) 
