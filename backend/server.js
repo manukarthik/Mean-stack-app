@@ -38,6 +38,7 @@ app.post('/post', auth.checkAuthenticated,  (req,res)=>{
 app.get('/users',async(req, res) => {
     try{
         
+        
         var users = await User.find({}, '-password -__v')
         res.send(users)
     }
