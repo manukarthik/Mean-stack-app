@@ -10,6 +10,7 @@ var router=express.Router()
     var userData = req.body;
     var user = new User(userData)
     user.save((err, newUser) => {
+        if(newUser )
         if(err)
         return res.status(500).send({ message: 'error saving user' })
 
