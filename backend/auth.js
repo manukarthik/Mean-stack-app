@@ -18,15 +18,22 @@ var router=express.Router()
     })
 })
 
+// router.get('/',(req,res)=>{
+//     var loggedin=jwt.Use
+// })
+
        router.post('/login', async (req, res) => {
         var LoginData = req.body;
+        console.log(LoginData)
         var user = await User.findOne({ email: LoginData.email })
         if (!user)
             return res.status(401).send({ message: 'Email or Password invalid' })
         bcrypt.compare(LoginData.password, user.password, (err, isMatch) => {
             if (!isMatch)
                 return res.status(401).send({ message: 'Email or passoword invalid' })
-            createSendToken(res,user)
+            createSendToken(res,LoginData)
+            return (LoginData)
+
         })
 
        })
@@ -34,7 +41,7 @@ var router=express.Router()
            var payload = { sub: user._id }
 
            var token = jwt.encode(payload, '123')
-         
+
            res.status(200).send({ token })
        }
 var auth = {
@@ -53,5 +60,5 @@ var auth = {
 
 }
 }
-       
+
 module.exports = auth
