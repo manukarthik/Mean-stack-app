@@ -20,16 +20,46 @@ app.get('/posts/:id', async(req, res) => {
     res.send(posts)
 })
 
+app.put('/update/:id', auth.checkAuthenticated, (req,res)=>{
+  console.log(req.body._id)
+  console.log(req.body)
+  var postData = req.body
+  postData.author = req.userIds
 
-app.post('/post', auth.checkAuthenticated,  (req,res)=>{
+     Post.findByIdAndUpdate({
+                 id: postData._id
+             }, {
+                 $set: {
+                     msg: "postData.msg"
+                 }
+             }, 
+                 {
+                     new: false
+                 }
+             
+,(err, result) => {
+         if (err) {
+             console.error('saving post eror');
+             return res.status(500).send({
+                 message: 'saving post error'
+             })
+         }
+         res.sendStatus(200)
+     })
+})
+
+app.post('/post', auth.checkAuthenticated, (req, res) => {
     var postData = req.body
+    postData.id = req.id
     postData.author = req.userId
     var post = new Post(postData)
-
+    console.log(post)
     post.save((err, result) => {
-        if(err){
-        console.error('saving post eror');
-        return res.status(500).send({ message: 'saving post error' })
+        if (err) {
+            console.error('saving post eror');
+            return res.status(500).send({
+                message: 'saving post error'
+            })
         }
         res.sendStatus(200)
     })
@@ -52,6 +82,7 @@ app.get('/users',async(req, res) => {
 app.get('/profile/:id', async (req, res) => {
     
     try {
+    
         var user = await User.findById(req.params.id, '-password -__v')
         res.send(user)
     }
