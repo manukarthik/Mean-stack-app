@@ -16,10 +16,11 @@ import { ProfileComponent } from "./Profile/profile.component";
 import { PostComponent } from "./Post/post.component";
 import { AuthInterceptorService } from "./authInterceptor.service";
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { NavService } from './nav.service';
 const routes =[
 
 { path: '', component: PostComponent },
-{path:'register', component:RegisterComponent},
+{path:  'register', component:RegisterComponent},
 { path: 'login', component: LoginComponent },
 { path: 'users', component: UsersComponent },
 { path: 'profile/:id', component: ProfileComponent }
@@ -30,10 +31,11 @@ const routes =[
     AppComponent, MessagesComponent, RegisterComponent, LoginComponent, UsersComponent, ProfileComponent, PostComponent
   ],
   imports: [
-    BrowserModule, HttpClientModule, FormsModule, MatButtonModule, MatCardModule, MatToolbarModule, RouterModule.forRoot(routes), MatInputModule,
+    BrowserModule, HttpClientModule,
+    FormsModule, MatButtonModule, MatCardModule, MatToolbarModule, RouterModule.forRoot(routes), MatInputModule,
     BrowserAnimationsModule, MatListModule, MatSnackBarModule
   ],
-  providers: [ApiService, AuthService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService,multi:true}],
+  providers: [ApiService, AuthService, NavService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService,multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
