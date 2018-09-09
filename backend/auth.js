@@ -44,6 +44,11 @@ var router=express.Router()
 
            res.status(200).send({ token })
        }
+
+       router.get('/auth', async(req,res)=>{
+           var payload = jwt.decode(token, '123');
+           req.userId = payload.sub;
+       })
 var auth = {
     router, //Express middleware to check the authorization header
      checkAuthenticated : (req, res, next)=> {
@@ -56,6 +61,7 @@ var auth = {
         return res.status(401).send({ message: 'Unauthorized.Auth header Invalid' })
 
     req.userId = payload.sub
+    console.log(req.userId);
     next()
 
 }
