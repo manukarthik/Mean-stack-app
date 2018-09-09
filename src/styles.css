@@ -2,10 +2,18 @@
 
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import '~bootstrap/dist/css/bootstrap.min.css';
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
+h1 h2 h3 h4 h5 h6 p {
+  font-size: 16px;
+  font-family: 'Lato',
+    sans-serif;
+  font-weight: normal;
+}
 
  .material-icons {
    font-family: 'Material Icons';
-   vertical-align: text-top;
+   vertical-align: middle;
    font-weight: normal;
    font-style: normal;
    font-size: 24px;

@@ -6,6 +6,6 @@
   <span style="flex:1 1 auto"></span>
   <button mat-button *ngIf="!authService.isAuthenticated" routerLink="/register">Register</button>
 <button mat-button *ngIf="!authService.isAuthenticated" routerLink="/login">Login</button>
-<button mat-button *ngIf="authService.isAuthenticated" (click)="authService.logout()">Logout</button>
+<button mat-button *ngIf="authService.isAuthenticated" (click)="authService.logout()"><i class="material-icons">perm_identity</i>Logout</button>
 </mat-toolbar>
 <router-outlet></router-outlet>

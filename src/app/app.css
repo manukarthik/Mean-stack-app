@@ -7,7 +7,7 @@
 }
 h4{
      font-size: 16px;
-     font-family: Helvetica,
+     font-family: Helvaetica,
      Arial,
      sans-serif;
      font-weight: normal;
@@ -17,6 +17,7 @@ h4{
   font-family: 'Material Icons';
   font-weight: normal;
   font-style: normal;
+  vertical-align: middle !important;
   font-size: 18px !important;
   line-height: 1;
   letter-spacing: normal;
@@ -30,11 +31,11 @@ h4{
 }
 ::ng-deep .mat-card-header-text {
   /* CSS styles go here */
-  margin: 0px; 
+  margin: 0px;
 }
 
 
 
-     
-   
- 
+
+
+

@@ -23,9 +23,10 @@ export class AppComponent {
   ngOnInit() {
     const tok = this.authService.token;
     console.log(tok);
-    this.subscription = this.navService
+   this.navService
       .getNavChangeEmitter()
       .subscribe(loginData => this.loginUser(loginData));
+      console.log("***",this.subscription);
   }
   loginUser(loginData: any) {
     console.log("hey" + loginData.name);
