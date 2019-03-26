@@ -20,7 +20,7 @@ app.get('/posts/:id', async(req, res) => {
     res.send(posts)
 })
 
-app.put('/update/:id', auth.checkAuthenticated, (req,res)=>{
+app.put('update/:id', auth.checkAuthenticated, (req,res)=>{
   console.log(req.body._id)
   console.log(req.body)
   var postData = req.body

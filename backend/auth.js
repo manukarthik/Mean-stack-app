@@ -24,7 +24,6 @@ var router=express.Router()
 
        router.post('/login', async (req, res) => {
         var LoginData = req.body;
-        console.log(LoginData)
         var user = await User.findOne({ email: LoginData.email })
         if (!user)
             return res.status(401).send({ message: 'Email or Password invalid' })
