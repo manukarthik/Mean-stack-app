@@ -38,7 +38,7 @@ export class ApiService {
     this.http
       .put(this.path + '/update/' + message._id, message)
       .subscribe(res => {
-        console.log(res);
+        console.log('***',res);
       });
   }
   selectMessage(message) {

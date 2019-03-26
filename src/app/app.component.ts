@@ -20,16 +20,15 @@ export class AppComponent {
     private navService: NavService
   ) {}
   title = "app";
-  ngOnInit() {
-    const tok = this.authService.token;
-    console.log(tok);
-   this.navService
-      .getNavChangeEmitter()
-      .subscribe(loginData => this.loginUser(loginData));
-      console.log("***",this.subscription);
-  }
+  // ngOnInit() {
+  //   const tok = this.authService.token;
+  //   console.log(tok);
+  //  this.navService
+  //     .getNavChangeEmitter()
+  //     .subscribe(loginData => this.loginUser(loginData));
+  //     console.log("***",this.subscription);
+  // }
   loginUser(loginData: any) {
-    console.log("hey" + loginData.name);
     this.loginData = loginData;
     return this.loginData;
   }

@@ -22,7 +22,7 @@ export class AuthService {
   }
   registerUser(registeredData) {
     return this.http
-      .post<any>(this.path + "/register", registeredData)
+      .post<any>(this.path + "/register", registeredData.value)
       .subscribe(res => {
         this.saveToken(res.token);
       });
@@ -31,7 +31,6 @@ export class AuthService {
   loginUser(loginData) {
     this.http.post<any>(this.path + "/login", loginData).subscribe(res => {
       this.saveToken(res.token);
-      this.navService.emitNavChangeEvent(loginData);
     });
   }
   saveToken(token) {
