@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from "@angular/router";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { MatButtonModule, MatCardModule, MatToolbarModule,MatInputModule, MatListModule} from '@angular/material';
+import { MatButtonModule, MatCardModule, MatToolbarModule,MatInputModule, MatListModule, ErrorStateMatcher, ShowOnDirtyErrorStateMatcher} from '@angular/material';
 import { FormsModule, ReactiveFormsModule  } from "@angular/forms";
 import { HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
 import { AppComponent } from './app.component';
@@ -33,9 +33,9 @@ const routes =[
   imports: [
     BrowserModule, HttpClientModule,
     FormsModule, MatButtonModule, MatCardModule, MatToolbarModule, RouterModule.forRoot(routes), MatInputModule,
-    BrowserAnimationsModule, MatListModule, MatSnackBarModule, ReactiveFormsModule
+    BrowserAnimationsModule, MatListModule, MatSnackBarModule, ReactiveFormsModule  
   ],
-  providers: [ApiService, AuthService, NavService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService,multi:true}],
+  providers: [ApiService, AuthService, NavService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService,multi:true},{provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

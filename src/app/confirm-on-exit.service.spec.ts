@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { ConfirmOnExitService } from './confirm-on-exit.service';
+import { ConfirmOnExitService } from "./confirm-on-exit-service";
 
 describe('ConfirmOnExitService', () => {
   beforeEach(() => {
