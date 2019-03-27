@@ -12,11 +12,11 @@
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <form>
-      <mat-input-container style="width:100%;">
-        <textarea [(ngModel)]="postMsg.msg" matInput placeholder="postMsg" name="postMsg " type="text"></textarea>
-      </mat-input-container>
-      <button (click)="post()" mat-raised-button color="primary">Post..
+    <form [formGroup] = "messageForm" (ngSubmit)="post(messageForm)">
+      <mat-form-field style="width:100%;">
+        <textarea matInput placeholder="postMsg" formControlName = "postMsg"  name="postMsg" type="text"></textarea>
+      </mat-form-field>
+      <button type="submit" mat-raised-button color="primary">Post..
         <i class="material-icons">near_me</i>
       </button>
     </form>

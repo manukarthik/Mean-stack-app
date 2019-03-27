@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import {FormGroup, FormControl, FormBuilder, Validators, FormGroupDirective} from '@angular/forms'
+import {FormGroup, FormBuilder, Validators, FormGroupDirective} from '@angular/forms'
 import { AuthService } from "../auth.service";
 import { ApiService } from '../api.service';
 import { Subject} from 'rxjs'
