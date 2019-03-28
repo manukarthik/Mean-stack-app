@@ -39,8 +39,19 @@ export class RegisterComponent {
   return pass === confirmPass ? null : { notSame: true }     
 }
 
+logKeyValuePairs(group : FormGroup) {
+   Object.keys(group.controls).forEach((key : string) => {
+      const abstractControl = group.get(key);
+      if(abstractControl instanceof FormGroup) {
+          this.logKeyValuePairs(abstractControl);
+      }
+      else {
+          console.log('key' + key +'' + 'value' +'' + abstractControl.value);
+      }
+   });
+}
 onSubmit() : void {
-    console.log(this.registerForm);
+    console.log(this.logKeyValuePairs(this.registerForm));
     this.authService.registerUser(this.registerForm)
 }
 }
