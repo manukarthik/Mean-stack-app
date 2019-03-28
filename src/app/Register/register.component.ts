@@ -46,10 +46,11 @@ logKeyValuePairs(group : FormGroup) {
           this.logKeyValuePairs(abstractControl);
       }
       else {
-          console.log('key' + key +'' + 'value' +'' + abstractControl.value);
+          abstractControl.markAsDirty();
       }
    });
 }
+
 onSubmit() : void {
     console.log(this.logKeyValuePairs(this.registerForm));
     this.authService.registerUser(this.registerForm)
