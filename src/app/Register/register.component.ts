@@ -18,12 +18,26 @@ export class RegisterComponent {
 
     constructor(private authService: AuthService, private apiService: ApiService, private fb: FormBuilder) { }
 
+    validationMessages = {
+        'email' : {
+            'required' : 'email is required'
+        },
+        'password' : {
+             'required' : 'password is required'
+        }
+
+    }
+
+    formErrors = {
+        'email' : '',
+        'password' : ''
+    }
     
 
     ngOnInit() {
         this.registerForm = this.fb.group({
             email : ['', Validators.required],
-            password : [''],
+            password : ['', Validators.required],
             confirmPassword: [''],
             name:  [''],
             imgname: [''],
@@ -39,20 +53,28 @@ export class RegisterComponent {
   return pass === confirmPass ? null : { notSame: true }     
 }
 
-logKeyValuePairs(group : FormGroup) {
+logValidationErrors(group : FormGroup) {
    Object.keys(group.controls).forEach((key : string) => {
       const abstractControl = group.get(key);
       if(abstractControl instanceof FormGroup) {
-          this.logKeyValuePairs(abstractControl);
+          this.logValidationErrors(abstractControl);
       }
       else {
-          abstractControl.markAsDirty();
+          if(abstractControl && !abstractControl.valid) {
+              const messages = this.validationMessages[key];
+              for(const errorKey in abstractControl.errors) {
+                  if(errorKey)
+                  this.formErrors[key] += messages[errorKey] + ' ';
+              }
+          }
       }
    });
 }
 
 onSubmit() : void {
-    console.log(this.logKeyValuePairs(this.registerForm));
+    this.logValidationErrors(this.registerForm);
+    console.log(this.formErrors);
     this.authService.registerUser(this.registerForm)
+    
 }
 }
